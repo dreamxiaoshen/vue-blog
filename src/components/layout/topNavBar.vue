@@ -229,7 +229,27 @@ import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment } fr
     width: 150%;
 
 }
+.menus-item-fu a:after {
+    position: absolute;
+    bottom: -5px;
+    left: -15px;
+    width: 0;
+    height: 3px;
+    background-color: #80c8f8;
+    content: "";
+    transition: all 0.3s;
+}
 
+.menus-item-fu a {
+    transition: all 0.2s;
+}
+
+.menus-item-fu a:hover:after {
+
+
+    width: 150%;
+
+}
 
 .app-header-sticky {
     width: 100%;

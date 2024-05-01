@@ -24,6 +24,6 @@ import Home from "@/views/home/HomeView.vue";
 }
 .app-container{
   background: url("@/assets/bg.jpg") no-repeat fixed;
-  background-size: 100%;
+  background-size: 100% 100%;
 }
 </style>
