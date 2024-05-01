@@ -197,7 +197,7 @@ import { Menu, Management, List, TrendCharts } from '@element-plus/icons-vue'
 // 计算运行天数
 //sDate1和sDate2是2002-12-18格式  
 var now = new Date();
-var sDate2 = "2024-04-18";
+var sDate2 = "2024-05-01";
 var nowData = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
 var aDate, oDate2, iDays
 aDate = nowData.split("-")

@@ -35,7 +35,23 @@ const text = ref(['一执一念一浮生，一悲一喜一枉然', '青春', '�
     <div class="home-main-container">
         <div class="home-main">
             <div class="left-container">
+                <div class="article-card" v-for="i in 10" :key="i">
 
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div class="right-container-left">
+                    <slidebar></slidebar>
+                </div>
             </div>
             <div class="right-container">
                 <slidebar></slidebar>
@@ -74,20 +90,7 @@ const text = ref(['一执一念一浮生，一悲一喜一枉然', '青春', '�
     }
 }
 
-.home-main-container {
-    height: 100%;
-    display: flex;
-    justify-content: center;
 
-    .home-main {
-        min-width: 900px;
-        //width: 1200px;
-        display: flex;
-        flex-direction: row;
-        margin-top: 50px;
-
-    }
-}
 
 .typedClass {
     display: flex;
@@ -106,16 +109,155 @@ const text = ref(['一执一念一浮生，一悲一喜一枉然', '青春', '�
     }
 }
 
-.left-container {
-    background-color: aqua;
-    height: 800px;
-    width: 900px;
-    margin-left:15px;
+
+
+
+//响应式布局（主代码）
+
+@media(width>960px) {
+    .home-main-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        .home-main {
+            min-width: 900px;
+            //width: 1200px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 50px;
+            
+
+        }
+    }
+
+    .left-container {
+        height: 100%;
+        width: 900px;
+        margin-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: wrap;
+        
+    }
+
+    .article-card {
+        height: 320px;
+        width: 47%;
+        background-color: aquamarine;
+        margin: 10px;
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    .right-container {
+        height: 100%;
+        width: 280px;
+        margin: 0 15px;
+        
+    }
+
+    .right-container-left {
+        display: none;
+    }
 }
 
-.right-container {
-    height: 100%;
-    width: 280px;
-    margin:0 15px;
+
+
+
+
+
+
+
+
+
+@media (width< 961px) {
+    .home-main-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        .home-main {
+            min-width: 750px;
+            //width: 1200px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 50px;
+            
+
+        }
+    }
+
+    .left-container {
+        height: 100%;
+        width: 900px;
+        margin-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: wrap;
+       
+    }
+
+    .article-card {
+        height: 320px;
+        width: 45%;
+        background-color: aquamarine;
+        margin: 10px;
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    .right-container {
+        display: none;
+        transition: all 0.3s;
+    }
+
+    .right-container-left {
+        width: 98%;
+    }
+}
+
+
+
+
+
+
+
+
+
+@media (width< 800px) {
+    .home-main-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        .home-main {
+            min-width: 430px;
+            //width: 1200px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 50px;
+
+        }
+    }
+
+    .left-container {
+        height: 100%;
+        //width: 900px;
+        margin-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: wrap;
+    }
+
+    .article-card {
+        height: 320px;
+        width: 100%;
+        background-color: aquamarine;
+        margin: 10px;
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    .right-container {
+        display: none;
+    }
 }
 </style>

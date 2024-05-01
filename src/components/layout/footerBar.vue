@@ -11,7 +11,7 @@
 
 <style scoped>
 .footer-bar{
-
+  color: white;
   display: flex;
   justify-content: center;
 }

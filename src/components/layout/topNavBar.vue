@@ -1,7 +1,9 @@
 <script setup>
 import { useScroll } from '@vueuse/core'
+import { ref } from 'vue'    // 引入ref
 const { y } = useScroll(window)
-import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment } from '@element-plus/icons-vue'
+import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment, Operation } from '@element-plus/icons-vue'
+const drawer = ref(false)
 </script>
 <template>
     <div class="top-nav-bar">
@@ -72,8 +74,14 @@ import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment } fr
                     留言
                 </router-link>
             </div>
-        </div>
 
+        </div>
+        <!-- 响应式布局导航栏 -->
+        <div class="more-menu">
+            <el-icon size="24px" color="white" @click="drawer = true">
+                <Operation />
+            </el-icon>
+        </div>
     </div>
     <div class="app-header-sticky" :class="{ show: y > 50 }">
         <div class="top-nav-bar-fu">
@@ -145,9 +153,122 @@ import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment } fr
                     </router-link>
                 </div>
             </div>
+            <!-- 响应式布局导航栏 -->
+            <div class="more-menu-fu">
+                <el-icon size="24px" @click="drawer = true">
+                    <Operation />
+                </el-icon>
+            </div>
+        </div>
+
+    </div>
+
+    <el-drawer v-model="drawer" :with-header="false" size="300px" show-close z-index="5">
+        <div class="blog-up">
+            <div>
+                <img src="@/assets/avatar.jpg" class="avatar">
+            </div>
+            <div>
+                <div style="display: flex;flex-direction: column;" @click="drawer = false">
+                    <router-link to="/tags" class="statistics">
+                        <span>文章 </span>
+                        <div style="display: flex;justify-content: center;">
+                            <text>10</text>
+                        </div>
+                    </router-link>
+
+
+                </div>
+                <div style="display: flex;flex-direction: column;margin-left: 30px;" @click="drawer = false">
+                    <router-link to="/tags" class="statistics">
+                        <span>分类</span>
+                        <div style="display: flex;justify-content: center;">
+                            <text>10</text>
+                        </div>
+                    </router-link>
+
+
+                </div>
+                <div style="display: flex;flex-direction: column;margin-left: 30px;" @click="drawer = false">
+                    <router-link to="/tags" class="statistics">
+                        <span>标签</span>
+                        <div style="display: flex;justify-content: center;">
+                            <text>10</text>
+                        </div>
+                    </router-link>
+
+
+                </div>
+            </div>
 
         </div>
-    </div>
+        <div class="blog-down">
+
+            <div class="drawer-item" @click="drawer = false">
+
+                <router-link to="/">
+
+                    <el-icon>
+                        <HomeFilled />
+                    </el-icon>
+                    首页
+                </router-link>
+            </div>
+            <div class="drawer-item" @click="drawer = false">
+
+                <router-link to="/archives">
+                    <el-icon>
+                        <List />
+                    </el-icon>
+                    归档
+                </router-link>
+            </div>
+            <div class="drawer-item" @click="drawer = false">
+
+                <router-link to="/categories">
+                    <el-icon>
+                        <Menu />
+                    </el-icon>
+                    分类
+                </router-link>
+            </div>
+            <div class="drawer-item" @click="drawer = false">
+
+                <router-link to="/tags">
+                    <el-icon>
+                        <Management />
+                    </el-icon>
+                    标签
+                </router-link>
+            </div>
+            <div class="drawer-item" @click="drawer = false">
+
+                <router-link to="/links">
+                    <el-icon>
+                        <HelpFilled />
+                    </el-icon>
+                    友链
+                </router-link>
+            </div>
+            <div class="drawer-item" @click="drawer = false">
+                <router-link to="/about">
+                    <el-icon>
+                        <Promotion />
+                    </el-icon>
+                    关于
+                </router-link>
+            </div>
+            <div class="drawer-item" @click="drawer = false">
+                <router-link to="/message">
+                    <el-icon>
+                        <Comment />
+                    </el-icon>
+                    留言
+                </router-link>
+            </div>
+
+        </div>
+    </el-drawer>
 </template>
 
 
@@ -155,7 +276,7 @@ import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment } fr
 <style lang="scss" scoped>
 .top-nav-bar {
     height: 50px;
-    background:rgb(0, 0, 0,0.5);
+    background: rgb(0, 0, 0, 0.5);
     //color: #fff;
     display: flex;
     justify-content: space-between;
@@ -191,6 +312,7 @@ import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment } fr
         }
     }
 }
+
 .nav-title-fu {
     display: flex;
     flex-direction: row;
@@ -229,6 +351,7 @@ import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment } fr
     width: 150%;
 
 }
+
 .menus-item-fu a:after {
     position: absolute;
     bottom: -5px;
@@ -270,6 +393,81 @@ import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment } fr
         transition: all 0.3s linear;
         transform: none;
         opacity: 1;
+    }
+}
+
+@media(width>799px) {
+
+    .more-menu,
+    .more-menu-fu {
+        display: none;
+    }
+}
+
+@media(width<800px) {
+
+    .nav-title,
+    .nav-title-fu {
+        display: none;
+    }
+
+    .more-menu,
+    .more-menu-fu {
+        cursor: pointer;
+    }
+}
+
+.blog-up {
+    width: 100%;
+    height: 250px;
+    background-color: white;
+    border-radius: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+
+    &>* {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+
+
+    }
+
+
+    .avatar {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        margin-top: 20px;
+    }
+
+    .statistics {
+        color: #000000;
+        text-decoration: none;
+
+        &:hover {
+            color: #80c8f8
+        }
+    }
+}
+
+.blog-down {
+    .drawer-item {
+        padding: 10px 5px;
+        margin-left: 30px;
+        border-radius: 10px 10px 10px 10px;
+        font-size: large;
+        cursor: pointer;
+        &>* {
+            text-decoration: none;
+            color: #000000;
+
+        }
+
+        &:hover {
+            background-color: #80c8f8;
+
+        }
     }
 }
 </style>
