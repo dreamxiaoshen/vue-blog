@@ -1,0 +1,155 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    height: 50vh;
+    background: rgb(0, 0, 0, 0.5) fixed;
+
+    .home-text {
+        position: absolute;
+        top: 20%;
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 80vw;
+
+    }
+
+    .home-icon {
+        position: absolute;
+        bottom: 10px;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+
+//响应式布局（主代码）
+
+@media(width>960px) {
+    .home-main-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        .home-main {
+            min-width: 900px;
+            //width: 1200px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 50px;
+
+
+        }
+    }
+
+    .left-container {
+        height: 100%;
+        width: 900px;
+        margin-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: wrap;
+
+    }
+
+
+    .right-container {
+        height: 100%;
+        width: 280px;
+        margin: 0 15px;
+
+    }
+
+    .right-container-left {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@media (width< 961px) {
+    .home-main-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        .home-main {
+            min-width: 750px;
+            //width: 1200px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 50px;
+
+
+        }
+    }
+
+    .left-container {
+        height: 100%;
+        width: 900px;
+        margin-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: wrap;
+
+    }
+
+
+    .right-container {
+        display: none;
+        transition: all 0.3s;
+    }
+
+    .right-container-left {
+        margin-top: 20px;
+        width: 98%;
+    }
+}
+
+
+
+
+
+
+
+
+
+@media (width< 800px) {
+    .home-main-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        .home-main {
+            min-width: 400px;
+            //width: 1200px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 50px;
+
+        }
+    }
+
+    .left-container {
+        height: 100%;
+        //width: 900px;
+        margin-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: wrap;
+    }
+
+    .right-container {
+        display: none;
+    }
+}
