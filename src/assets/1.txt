@@ -1,0 +1,262 @@
+---
+title: uniapp
+date: 2024-03-21 18:40:30
+tags: uniApp
+categories: uniAPP
+description: uniAPP开发笔记
+swiper_index: 1 #置顶轮播图顺序，非负整数，数字越大越靠前
+cover: https://tse2-mm.cn.bing.net/th/id/OIP-C.vy_jkKngIV1kqB104tZcAQHaEK?rs=1&pid=ImgDetMain
+
+---
+
+# UniApp开发
+
+## 1.下载开发者工具
+
+1.1打开官网[https://www.dcloud.io/hbuilderx.html](https://www.dcloud.io/hbuilderx.html)下载对应版本
+
+1.2.新建项目，选择默认模版，自定义目录
+
+## 2.将项目运行在微信小程序中
+
+2.1打开微信小程序开发的设置界面，开启服务端口，回到，uni编辑器，再次运行，可能需要填写微信小程序开发者工具的安装路径
+
+3.认识目录
+
+![image-20240321193706967](uniapp/image-20240321193706967.png)
+
+## 配置文件
+
+```json
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				//页面顶部标题
+				"navigationBarTitleText": "首页"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		//导航栏标题文字内容 
+		"navigationBarTitleText": "uni-app",
+		//导航栏背景颜色 
+		"navigationBarBackgroundColor": "#F8F8F8",
+		//导航栏背景颜色 
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+}
+
+```
+
+## 添加tabar
+
+为底部添加tabar，并在tarbar对页面进行切换
+
+```json
+"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的"
+			}
+		]
+	}
+```
+
+在底部出现底部导航栏，添加图片，将图表放在静态文件夹下通过设置来显示
+
+```json
+//默认的颜色
+"iconPath": "static/...",
+//选中的样色
+"selectedIconPath": "static/...",
+```
+
+设置路径
+
+设置选中的颜色
+
+在tabar下设置`selectedcolor`改为主题色
+
+## 轮播图
+
+```vue
+<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
+		<swiper-item>
+			<view class="swiper-item"></view>
+		</swiper-item>
+		<swiper-item>
+			<view class="swiper-item"></view>
+		</swiper-item>
+	</swiper>
+```
+
+默认全屏宽度750rpx，
+
+点击事件@tap=“事件”
+
+## 引入 uni-ui 组件库
+
+### 操作步骤
+
+安装 [uni-ui 组件库](https://uniapp.dcloud.net.cn/component/uniui/quickstart.html#npm安装)
+
+```sh
+pnpm i @dcloudio/uni-ui
+```
+
+**配置自动导入组件**
+
+```json
+// pages.json
+{
+  // 组件自动导入
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      // uni-ui 规则如下配置  // [!code ++]
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue" // [!code ++]
+    }
+  },
+  "pages": [
+    // …省略
+  ]
+}
+```
+
+**安装类型声明文件**（ts用）
+
+```sh
+npm i -D @uni-helper/uni-ui-types
+```
+
+**配置类型声明文件**（ts用）
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "types": [
+      "@dcloudio/types", // uni-app API 类型
+      "miniprogram-api-typings", // 原生微信小程序类型
+      "@uni-helper/uni-app-types", // uni-app 组件类型
+      "@uni-helper/uni-ui-types" // uni-ui 组件类型  // [!code ++]
+    ]
+  },
+  // vue 编译器类型，校验标签类型
+  "vueCompilerOptions": {
+    "nativeTags": ["block", "component", "template", "slot"]
+  }
+}
+```
+
+### 持久化存储插件
+
+安装持久化存储插件： [pinia-plugin-persistedstate](https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/config.html#storage)
+
+```sh
+pnpm i pinia-plugin-persistedstate
+```
+
+插件默认使用 `localStorage` 实现持久化，小程序端不兼容，需要替换持久化 API。
+
+### 基本用法
+
+::: code-group
+
+```ts {28-31} [stores/modules/member.ts]
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+
+// 定义 Store
+export const useMemberStore = defineStore(
+  'member',
+  () => {
+    // 会员信息
+    const profile = ref<any>()
+
+    // 保存会员信息，登录时使用
+    const setProfile = (val: any) => {
+      profile.value = val
+    }
+
+    // 清理会员信息，退出时使用
+    const clearProfile = () => {
+      profile.value = undefined
+    }
+
+    // 记得 return
+    return {
+      profile,
+      setProfile,
+      clearProfile,
+    }
+  },
+  // TODO: 持久化
+  {
+    //只能在网页端使用
+    //persist: true,
+    persist:{
+      storage:{
+        getItem(key){
+          return uni.getStorageSync(key)
+        },
+        setItem(key,value){
+          uni.setStorageSync(key,value)
+        }
+      }
+    }
+  },
+)
+```
+
+```ts {2,7} [stores/index.ts]
+import { createPinia } from 'pinia'
+import persist from 'pinia-plugin-persistedstate'
+
+// 创建 pinia 实例
+const pinia = createPinia()
+// 使用持久化存储插件
+pinia.use(persist)
+
+// 默认导出，给 main.ts 使用
+export default pinia
+
+// 模块统一导出
+export * from './modules/member'
+```
+
+```ts {2,8} [main.ts]
+import { createSSRApp } from 'vue'
+import pinia from './stores'
+
+import App from './App.vue'
+export function createApp() {
+  const app = createSSRApp(App)
+
+  app.use(pinia)
+  return {
+    app,
+  }
+}
+```
+

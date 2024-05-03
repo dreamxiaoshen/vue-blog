@@ -1,19 +1,5 @@
 <script setup>
 import slidebar from "@/components/slidebar/sideBar.vue";
-const activities = [
-  {
-    content: '20',
-    timestamp: '2018-08',
-  },
-  {
-    content: '10',
-    timestamp: '2018-06',
-  },
-  {
-    content:'5',
-    timestamp: '2018-04',
-  }
-];
 </script>
 
 <template>
@@ -21,7 +7,7 @@ const activities = [
         <div class="home-container">
             <div class="home-text">
                 <div style="display: flex; justify-content: center; align-items: center;">
-                    <text>归档</text>
+                    <text>关于</text>
                 </div>
 
             </div>
@@ -31,19 +17,9 @@ const activities = [
                 <div class="left-container">
                     <div class="left-container-card">
                         <el-card class="main-card">
-                            <el-timeline style="max-width: 600px;margin:20px">
-                                <div style="margin:20px;font-size:30px">
-                                    文章总览-{{20}}
-                                </div>
-                                <el-timeline-item
-                                v-for="item in activities"
-                                :key="item"
-                                :timestamp="item.timestamp"
-                                class="custom-timeline-item"
-                                >
-                               共计：{{item.content}}
-                                </el-timeline-item>
-                            </el-timeline>
+                           <div>
+                            菜就多练
+                           </div>
                         </el-card>
                     </div>
 
@@ -73,13 +49,23 @@ const activities = [
 .main-card {
     margin: 8px;
     min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
 }
 
-//归档页面样式
-.custom-timeline-item{
-font-size: 30px;
-margin: 20px;
-}
+
+
+
+
+
+
+
+
+
+
+
 
 .category-item {
     padding: 10PX;

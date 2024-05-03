@@ -1,6 +1,60 @@
 <script setup>
 import slidebar from "@/components/slidebar/sideBar.vue";
-
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+const categoryList=ref([
+    {
+        id: 1,
+        title: "分类1",
+        count: 10
+    },
+    {
+        id: 2,
+        title: "分类2",
+        count: 20
+    },
+    {
+        id: 3,
+        title: "分类3",
+        count: 30
+    },
+    {
+        id: 4,
+        title: "分类4",
+        count: 40
+    },
+    {
+        id: 5,
+        title: "分类5",
+        count: 50
+    },
+    {
+        id: 6,
+        title: "分类6",
+        count: 60
+    },
+    {
+        id: 7,
+        title: "分类7",
+        count: 70
+    },
+    {
+        id: 8,
+        title: "分类8",
+        count: 80
+    },
+    {
+        id: 9,
+        title: "分类9",
+        count: 90
+    },
+    {
+        id: 10,
+        title: "分类10",
+        count: 100
+    }
+]);
+const router = useRouter();
 
 </script>
 
@@ -19,10 +73,10 @@ import slidebar from "@/components/slidebar/sideBar.vue";
                 <div class="left-container">
                     <div class="left-container-card">
                         <el-card class="main-card">
-                            <div style="display: flex;" class="category-item" v-for="item in 10" :key="item">
+                            <div style="display: flex;" class="category-item" v-for="item in categoryList" :key="item.id" @click="router.push('/categories/'+item.title)">
                                 <div class="circle"></div>
-                                <text style="margin-left: 10px;" class="category-name">分类1</text>
-                                <text style="margin-left: 10px;color: gray;">(10)</text>
+                                <text style="margin-left: 10px;" class="category-name">{{item.title}}</text>
+                                <text style="margin-left: 10px;color: gray;">({{ item.count }})</text>
                             </div>
                         </el-card>
                     </div>

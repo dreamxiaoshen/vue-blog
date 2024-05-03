@@ -4,12 +4,18 @@ import { ref } from 'vue'    // 引入ref
 const { y } = useScroll(window)
 import { HomeFilled, List, Menu, Management, HelpFilled, Promotion, Comment, Operation } from '@element-plus/icons-vue'
 const drawer = ref(false)
+import { useRouter } from 'vue-router'
+const route = useRouter()
+const mainData = ref({})
+import {userDataStore} from "@/stores/userDataStore";
+const DataStore = userDataStore();
+mainData.value = DataStore.userData
 </script>
 <template>
     <div class="top-nav-bar">
         <div style="font-size:18px;font-weight:bold;">
             <router-link to="/" style="text-decoration: none;color: white;">
-                风雨
+                {{ mainData.nickName }}
             </router-link>
         </div>
         <div class="nav-title">
@@ -204,9 +210,8 @@ const drawer = ref(false)
         </div>
         <div class="blog-down">
 
-            <div class="drawer-item" @click="drawer = false">
-
-                <router-link to="/">
+            <div class="drawer-item" @click="drawer = false;route.push('/')">
+                <router-link>
 
                     <el-icon>
                         <HomeFilled />
@@ -214,7 +219,7 @@ const drawer = ref(false)
                     首页
                 </router-link>
             </div>
-            <div class="drawer-item" @click="drawer = false">
+            <div class="drawer-item" @click="drawer = false;route.push('/archives')">
 
                 <router-link to="/archives">
                     <el-icon>
@@ -223,7 +228,7 @@ const drawer = ref(false)
                     归档
                 </router-link>
             </div>
-            <div class="drawer-item" @click="drawer = false">
+            <div class="drawer-item" @click="drawer = false ;route.push('/categories')">
 
                 <router-link to="/categories">
                     <el-icon>
@@ -232,7 +237,7 @@ const drawer = ref(false)
                     分类
                 </router-link>
             </div>
-            <div class="drawer-item" @click="drawer = false">
+            <div class="drawer-item" @click="drawer = false ;route.push('/tags')">
 
                 <router-link to="/tags">
                     <el-icon>
@@ -241,7 +246,7 @@ const drawer = ref(false)
                     标签
                 </router-link>
             </div>
-            <div class="drawer-item" @click="drawer = false">
+            <div class="drawer-item" @click="drawer = false ;route.push('/links')">
 
                 <router-link to="/links">
                     <el-icon>
@@ -250,7 +255,7 @@ const drawer = ref(false)
                     友链
                 </router-link>
             </div>
-            <div class="drawer-item" @click="drawer = false">
+            <div class="drawer-item" @click="drawer = false ;route.push('/about')">
                 <router-link to="/about">
                     <el-icon>
                         <Promotion />
@@ -258,7 +263,7 @@ const drawer = ref(false)
                     关于
                 </router-link>
             </div>
-            <div class="drawer-item" @click="drawer = false">
+            <div class="drawer-item" @click="drawer = false ;route.push('/message')">
                 <router-link to="/message">
                     <el-icon>
                         <Comment />

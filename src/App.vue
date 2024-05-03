@@ -49,6 +49,7 @@ import Footer from "./components/layout/footerBar.vue";
 .app-container {
   background: url("@/assets/bg.jpg") no-repeat fixed;
   background-size: cover;
+  min-height: 100vh;
 }
 
 // 滚动条

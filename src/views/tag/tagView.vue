@@ -1,6 +1,26 @@
 <script setup>
 import slidebar from "@/components/slidebar/sideBar.vue";
+import { ref } from "vue";
 const color = ['#03a9f4', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722', '#795548', '#9e9e9e', '#607d8b'];
+const tagList =ref([
+    {id: 1, name: '标签1'},
+    {id: 2, name: '标签2'},
+    {id: 3, name: '标签3'},
+    {id: 4, name: '标签4'},
+    {id: 5, name: '标签5'},
+    {id: 6, name: '标签6'},
+    {id: 7, name: '标签7'},
+    {id: 8, name: '标签8'},
+    {id: 9, name: '标签9'},
+    {id: 10, name: '标签10'},
+    {id: 11, name: '标签11'},
+    {id: 12, name: '标签12'},
+    {id: 13, name: '标签13'},
+    {id: 14, name: '标签14'},
+    {id: 15, name: '标签15'},
+    {id: 16, name: '标签16'},
+    {id: 17, name: '标签17'},
+]) 
 </script>
 
 <template>
@@ -22,8 +42,8 @@ const color = ['#03a9f4', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3',
                                 <router-link :style="{
                                     'font-size': Math.floor(Math.random() * 20) + 15 + 'px',
                                     'color': color[Math.floor(Math.random() * 20)]
-                                }" v-for="item in 50" :key="item" :to="'/tags/' + item.id">
-                                    标签
+                                }" v-for="item in tagList" :key="item" :to="'/tags/' + item.name">
+                                    {{ item.name }}
                                 </router-link>
 
                             </div>
@@ -79,34 +99,4 @@ const color = ['#03a9f4', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3',
 
 
 
-
-
-
-
-
-
-
-
-
-.category-item {
-    padding: 10PX;
-
-    &:hover {
-        .circle {
-            border: 5px solid hsl(30, 94%, 47%);
-        }
-
-
-
-    }
-
-    .category-name {
-        cursor: pointer;
-
-        &:hover {
-            color: #80c8f8;
-        }
-
-    }
-}
 </style>
