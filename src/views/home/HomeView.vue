@@ -3,6 +3,8 @@
 import { ArrowDownBold } from '@element-plus/icons-vue'
 import { ref } from "vue";
 import slidebar from "@/components/slidebar/sideBar.vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 import {userDataStore} from "@/stores/userDataStore";
 const DataStore = userDataStore();
 
@@ -187,7 +189,7 @@ DataStore.userData=mainData.value;
                 <div class="left-container">
                     <div class="article-container">
 
-                        <div class="article-card" v-for="item in articleList" :key="item.id">
+                        <div class="article-card" v-for="item in articleList" :key="item.id" @click="router.push('/article/'+item.id)">
                             <div style="height: 190px; ">
                                 <img :src="item.background"
                                     style="width: 100%; height: 100%; border-radius:10px 10px 0px 0px;  object-fit: cover;">
@@ -404,6 +406,11 @@ DataStore.userData=mainData.value;
         transition: all 0.3s;
 
     }
+    .article-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
 
     .article-card {
         height: 320px;
@@ -462,6 +469,11 @@ DataStore.userData=mainData.value;
         background-color: aquamarine;
         margin: 10px;
         border-radius: 10px 10px 10px 10px;
+    }
+    .article-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
     }
 
     .right-container {

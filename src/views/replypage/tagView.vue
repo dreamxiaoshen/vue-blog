@@ -53,7 +53,7 @@ const tagArticle = [
                     <div class="left-container-card">
                         <el-card class="main-card">
                             <el-timeline style="max-width: 600px;margin:20px">
-                                <el-timeline-item v-for="item in tagArticle" :key="item" class="custom-timeline-item">
+                                <el-timeline-item v-for="item in tagArticle" :key="item" class="custom-timeline-item" @click="router.push('/article/' + item.id)">
                                     <div class="custom-timeline-item-content">
                                         <div>
                                             <img src="@/assets/articlebg.jpg"

@@ -61,6 +61,7 @@
 
 
 <script>
+import { useRoute } from 'vue-router';
 const text = `
 
 # UniApp开发
@@ -235,6 +236,13 @@ export default {
     },
   },
   setup() {
+    
+    const route = useRoute();
+    const articleTitle = route.params.articleTitle;
+    console.log(articleTitle);
+
+
+
 
   }
 };
@@ -265,10 +273,6 @@ export default {
   top: 60px;
 }
 
-.catalogue-card {
-
-
-}
 .catalogue{
   transition: all 0.3s;
   &:hover{
