@@ -16,3 +16,15 @@ export const categoryGetService = ()=>{
 export const tagGetService = ()=>{
     return request.get('/tag');
 }
+//根据分类数据查询文章
+export const articleByCategoryGetService = (categoryTitle)=>{
+    return request.get('/articleByCategory?categoryTitle='+categoryTitle);
+}
+//根据标签数据查询文章
+export const articleByTagGetService = (tagTitle)=>{
+    return request.get('/articleByTag?tagTitle='+tagTitle);
+}
+//根据id据查询文章
+export const articleByIdService = (id)=>{
+    return request.get('/articleById?id='+id);
+}

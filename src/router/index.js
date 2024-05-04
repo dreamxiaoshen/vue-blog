@@ -49,7 +49,7 @@ const routes = [
         path: '/categories/:categoriesTitle',
         component: maincategoriesview,
     },{
-        path: '/article/:articleTitle',
+        path: '/article/:articleId',
         component: articleView,
     }
 

@@ -2,10 +2,20 @@
 import slidebar from "@/components/slidebar/sideBar.vue";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
+import {articleByCategoryGetService} from "@/api/userInfo.js";
+import { ref } from "vue";
 const route = useRoute();
 const router = useRouter();
 const categoriesTitle = route.params.categoriesTitle;
-const categoriesArticle = [
+const getArticleList = async () => {
+    const result = await articleByCategoryGetService(categoriesTitle);
+    console.log(result);
+    categoriesArticle.value=result.data;
+    for (let i = 0; i < categoriesArticle.value.length; i++) {
+        categoriesArticle.value[i].createTime = categoriesArticle.value[i].createTime.split('T')[0];
+    }
+}
+const categoriesArticle = ref([
     {
         id: "1",
         title: "Vue.js 2.0 发布，带来全新的特性",
@@ -36,7 +46,8 @@ const categoriesArticle = [
         title: "Vue.js 7.0 发布，带来全新的特性",
         timestamp: "2021-08-15"
     },
-];
+]);
+getArticleList();
 </script>
 
 <template>
@@ -63,7 +74,7 @@ const categoriesArticle = [
                                         </div>
                                         <div style="margin-left: 20px;">
 
-                                            <div style="font-size: 15px;">{{ item.timestamp }}</div><br>
+                                            <div style="font-size: 15px;">{{ item.createTime }}</div><br>
                                             <div class="custom-timeline-item-title"
                                                 style="font-size: 20px; font-weight: bold;">{{ item.title }}</div>
                                         </div>

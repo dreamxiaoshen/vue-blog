@@ -2,10 +2,21 @@
 import slidebar from "@/components/slidebar/sideBar.vue";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
+import {articleByTagGetService} from "@/api/userInfo.js";
+import { ref } from "vue";
 const router = useRouter();
 const route = useRoute()
 const tagTitle = route.params.tagTitle;
-const tagArticle = [
+
+const getArticleList = async () => {
+    const result = await articleByTagGetService(tagTitle);
+    console.log(result);
+    tagArticle.value=result.data;
+    for (let i = 0; i < tagArticle.value.length; i++) {
+        tagArticle.value[i].createTime = tagArticle.value[i].createTime.split('T')[0];
+    }
+}
+const tagArticle =ref( [
     {
         id: "1",
         title: "Vue.js 2.0 发布，带来全新的特性",
@@ -36,7 +47,8 @@ const tagArticle = [
         title: "Vue.js 7.0 发布，带来全新的特性",
         timestamp: "2021-08-15"
     },
-];
+]);
+getArticleList();
 </script>
 
 <template>
@@ -63,7 +75,7 @@ const tagArticle = [
                                         </div>
                                         <div style="margin-left: 20px;">
 
-                                            <div style="font-size: 15px;">{{ item.timestamp }}</div><br>
+                                            <div style="font-size: 15px;">{{ item.createTime }}</div><br>
                                             <div class="custom-timeline-item-title"
                                                 style="font-size: 20px; font-weight: bold;">{{ item.title }}</div>
                                         </div>

@@ -267,7 +267,7 @@ getArticleList()
                                     </div>
                                     <div class="home-text-small">
                                         <text>发布于:</text>
-                                        <text>{{ item.date }}</text>
+                                        <text>{{ item.createTime.split('T')[0] }}</text>
                                     </div>
                                 </div>
 
@@ -468,6 +468,7 @@ getArticleList()
         display: flex;
         flex-wrap: wrap;
         justify-content: start;
+        width: 100%
     }
 
     .article-card {
@@ -530,6 +531,7 @@ getArticleList()
     }
 
     .article-container {
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: start;
