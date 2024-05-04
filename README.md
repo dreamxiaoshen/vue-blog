@@ -1,24 +1,42 @@
-# blog2
+# blog( 前端博客)
 
-## Project setup
-```
+## 关于项目
+
+本项目是依照hexo中butterfly主题为参考开发的前后端分离项目，
+
+本项目使用了vue3进行开发，主要使用插件为
+**v-md-editor**实现进行文章预览
+**vueuse**实现进行导航栏吸顶
+**axios**实现进行网络请求开发
+**element-plus**实现进行页面搭建
+**pinia实现数据存储**
+**pinia-persistedstate**实现进行数据持久化
+**sass**实现进行样式开发
+**vue-router**实现路由切换
+**vue3typed**实现主页打字机
+
+## 本项目为前端练手项目
+
+本项目为本人前端练手项目，由于本人从未学过前端，所以在本项目代码中存在很多赘于代码，希望在以后的学习中解决这些问题，在这里也定下一个目标，愿未来有你有我有代码
+
+
+
+## 安装
+
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+## 运行
+
+```bash
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+**愿世界和平**
 
-### Lints and fixes files
-```
-npm run lint
-```
+------
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+**写于2024-5-4**
+
+**大一**
