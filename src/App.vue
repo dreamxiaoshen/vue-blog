@@ -7,7 +7,7 @@ import Footer from "./components/layout/footerBar.vue";
 <template>
   <div class="app-container">
     <topNavBarVue></topNavBarVue>
-    <router-view v-slot="{ Component }">
+    <router-view  :key="$route.fullPath" v-slot="{ Component }">
       <transition name="fade" mode="out-in">
         <keep-alive>
 
@@ -22,7 +22,7 @@ import Footer from "./components/layout/footerBar.vue";
 
     <Footer></Footer>
   </div>
-
+<el-backtop :right="10" :bottom="50" />
 </template>
 
 

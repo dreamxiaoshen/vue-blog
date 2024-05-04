@@ -31,7 +31,7 @@ mainData.value = DataStore.userData
 
         <!-- up昵称界面 -->
         <div style="font-size: 30px;">
-            <text>{{ mainData.nickName }}</text>
+            <text>{{ mainData.nickname }}</text>
         </div>
         <!-- up名言界面 -->
         <div style="font-size: 20px;">

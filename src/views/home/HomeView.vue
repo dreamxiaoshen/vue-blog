@@ -5,7 +5,8 @@ import { ref } from "vue";
 import slidebar from "@/components/slidebar/sideBar.vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
-import {userDataStore} from "@/stores/userDataStore";
+import { userDataStore } from "@/stores/userDataStore";
+import { userInfoGetService,articleListGetService } from "@/api/userInfo.js"
 const DataStore = userDataStore();
 
 //通过函数向下滚动，用按钮进行控制
@@ -15,11 +16,23 @@ const scrollDown = () => {
         top: document.documentElement.clientHeight
     });
 }
-
-const mainData = ref({
-    nickName: '风雨',
+//获得用户信息
+const getUserData = async () => {
+    const res = await userInfoGetService();
+    mainData.value = res.data
+    DataStore.userData = mainData.value;
+    // typeSentence.value = [...typeSentence.value, ...res.data.typeSentence]
+}
+//获得文章列表
+const getArticleList = async () => {
+    const res = await articleListGetService();
+    articleList.value = res.data
+    console.log(articleList.value)
+}
+const mainData = ref({/* 
+    nickname: '风雨',
     introduction: '这是一个简介',
-    announcement:'这是一个公告1111',
+    announcement: '这是一个公告1111',
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     articleCount: 100,
     categoryCount: 10,
@@ -120,10 +133,11 @@ const mainData = ref({
         '一生一世一场风，一生一世一场雾',
         '一生一世一场雷，一生一世一场霜',
         '一生一世一场雾，一生一世一场霾',
-    ]
+    ] */
 })
-const articleList = [
-    {
+
+const articleList =ref([
+    /* {
         id: 1,
         title: "文章标题1",
         tag: "标签1",
@@ -158,10 +172,52 @@ const articleList = [
         date: "2022-01-04",
         content: "文章内容4",
         background: "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"
-    },
-]
-DataStore.userData=mainData.value;
-//console.log(DataStore);
+    }, */
+]) 
+
+const typeSentence = ref([
+    '那句我喜欢你，温暖了我一整个冬季',
+    '我希望和你并排站在一起，看每个黄昏日落',
+    '他们说，有风的地方 就是你爱着的人的灵魂在飞舞',
+    '我们都是单翅的天使，只有拥抱才能飞翔',
+    '只要换你一次微笑，就算是做梦也会笑',
+    '无论你多么讨厌你的学校，当你离开久了，你还是会想念它',
+    '不是人人都能活的低调，可以低调的基础是随时都能高调',
+    '幽默就是一个人想哭的时候还有笑的兴致',
+    '喜欢一个人，就是在一起很开心；爱一个人，就是即使不开心，也想在一起',
+    '当看破一切的时候，才知道，原来失去比拥有更踏实',
+    '当我向你倾诉我的烦恼，那不是抱怨，那是我对你的信任',
+    '任何事情都应该去尝试一下，因为你无法知道，什么样的事或者什么样的人将会改变你的一生',
+    '眼泪，是为了洗净眼睛，让我们看清事实',
+    '别人怎么看你，和你毫无关系 你要怎么活，也和别人毫无关系',
+    '记住，不是所有人都是真心 所以，不要那么轻易的就去相信',
+    '爱情就是个梦，而我睡过了头',
+    '我独自说的对白，静候彼岸花的盛开',
+    '你永远都不知道自己有多坚强，直到变得坚强成了你唯一的选择 ',
+    '没有一种悲伤是不能被时间减轻的 ',
+    '时间，可以了解爱情，可以证明爱情，也可以推翻爱情 ',
+    '放弃、你说得如此容易 我却要用尽力气去执行 ',
+    '不是所有的付出都有回报的，但我不想成为那个少数的意外 ',
+    '侵泡过眼泪的微笑最美丽，体味过挫折的成功最可贵 ',
+    '为了不让生活留下遗憾和后悔，我们应该尽可能抓住一切改变生活的机会 ',
+    '有意思的体悟是，伤害你最深的人，往往是那些声称永远不会伤害你的人 ',
+    '不想难过，不想流泪，就不要去好奇那些不该看的东西 ',
+    '有时候，你问的问题，对方一直在闪躲，那就是委婉的告诉你，真实的回答很残忍 ',
+    '只要爱着一个人，也就永远会有失望的时刻',
+    '活着，就是要活得比昨天好一些，再好一些，要爱得比昨天幸福一些，再幸福一些 ',
+    '如果有人问起，就说忘了 不解释，不悲伤 ',
+    '有些人有些事，当我们懂得的时候已不在年轻 ',
+    '如果必须失去，但愿是忧愁 如果必须遗忘，但愿是烦恼 ',
+    '你默默地笑着，不对我说一句话，但我感觉，为了这个，我期待了很久了 ', 
+    '没什么比等待更难受，当你连自己在等什么都不知道的时候 ',
+    '我想拥抱每个人，但我得先温暖我自己，请容忍我 ',
+    '我一直在关注你，用一切你知道或不知道的方式 ',
+    '每个人心中都有一道伤，那是曾经天塌下的地方 ',
+    '多少人以友谊的名义，爱一个人 ',
+    '有勇气说出那些话，却没有勇气去承受之后的那些痛苦 ',
+])
+getUserData();
+getArticleList()
 </script>
 
 <template>
@@ -172,11 +228,11 @@ DataStore.userData=mainData.value;
             </el-icon>
             <div class="home-text">
                 <div style="display: flex; justify-content: center; align-items: center;">
-                    <text>{{ mainData.nickName }}</text>
+                    <text>{{ mainData.nickname }}</text>
                 </div>
                 <!-- 打字机效果 -->
                 <div>
-                    <vuetyped class="typedClass" :strings="mainData.typeSentence" :showCursor="true" :typeSpeed="200"
+                    <vuetyped class="typedClass" :strings="typeSentence" :showCursor="true" :typeSpeed="200"
                         :loop="true">
                         <div class="typing"></div>
                     </vuetyped>
@@ -189,7 +245,8 @@ DataStore.userData=mainData.value;
                 <div class="left-container">
                     <div class="article-container">
 
-                        <div class="article-card" v-for="item in articleList" :key="item.id" @click="router.push('/article/'+item.id)">
+                        <div class="article-card" v-for="item in articleList" :key="item.id"
+                            @click="router.push('/article/' + item.id)">
                             <div style="height: 190px; ">
                                 <img :src="item.background"
                                     style="width: 100%; height: 100%; border-radius:10px 10px 0px 0px;  object-fit: cover;">
@@ -406,6 +463,7 @@ DataStore.userData=mainData.value;
         transition: all 0.3s;
 
     }
+
     .article-container {
         display: flex;
         flex-wrap: wrap;
@@ -470,6 +528,7 @@ DataStore.userData=mainData.value;
         margin: 10px;
         border-radius: 10px 10px 10px 10px;
     }
+
     .article-container {
         display: flex;
         flex-wrap: wrap;

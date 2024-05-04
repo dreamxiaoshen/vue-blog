@@ -1,7 +1,9 @@
 <script setup>
 import slidebar from "@/components/slidebar/sideBar.vue";
 import { useRoute } from "vue-router";
-const route = useRoute()
+import { useRouter } from "vue-router";
+const route = useRoute();
+const router = useRouter();
 const categoriesTitle = route.params.categoriesTitle;
 const categoriesArticle = [
     {

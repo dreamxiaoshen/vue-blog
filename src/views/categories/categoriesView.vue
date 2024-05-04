@@ -2,6 +2,12 @@
 import slidebar from "@/components/slidebar/sideBar.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { categoryGetService } from "@/api/userInfo.js"
+//获得分类数据
+const getArticleList = async() => {
+   const res=await categoryGetService();
+   categoryList.value=res.data;
+}
 const categoryList=ref([
     {
         id: 1,
@@ -55,7 +61,7 @@ const categoryList=ref([
     }
 ]);
 const router = useRouter();
-
+getArticleList()
 </script>
 
 <template>

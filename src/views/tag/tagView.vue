@@ -2,6 +2,11 @@
 import slidebar from "@/components/slidebar/sideBar.vue";
 import { ref } from "vue";
 const color = ['#03a9f4', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722', '#795548', '#9e9e9e', '#607d8b'];
+import { tagGetService } from "@/api/userInfo.js"
+const getTag=async ()=>{
+    const res=await tagGetService()
+    tagList.value=res.data
+}
 const tagList =ref([
     {id: 1, name: '标签1'},
     {id: 2, name: '标签2'},
@@ -21,6 +26,7 @@ const tagList =ref([
     {id: 16, name: '标签16'},
     {id: 17, name: '标签17'},
 ]) 
+getTag()
 </script>
 
 <template>

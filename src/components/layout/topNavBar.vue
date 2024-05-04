@@ -15,7 +15,7 @@ mainData.value = DataStore.userData
     <div class="top-nav-bar">
         <div style="font-size:18px;font-weight:bold;">
             <router-link to="/" style="text-decoration: none;color: white;">
-                {{ mainData.nickName }}
+                {{ mainData.nickname }}
             </router-link>
         </div>
         <div class="nav-title">
@@ -93,7 +93,7 @@ mainData.value = DataStore.userData
         <div class="top-nav-bar-fu">
             <div style="font-size:18px;font-weight:bold;">
                 <router-link to="/" style="text-decoration: none;color: black;">
-                    风雨
+                    {{ mainData.nickname }}
                 </router-link>
             </div>
             <div class="nav-title-fu">
